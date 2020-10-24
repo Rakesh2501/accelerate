@@ -150,6 +150,9 @@ class Dashboard extends React.Component{
 
                         </Paper>
                     </Grid>
+
+                    {/* goals */}
+
                 </Grid>
             </div>
         )

@@ -1,6 +1,6 @@
 import React from 'react';
-import {BrowserRouter as Router,Route} from 'react-router-dom'
-import {AppBar, Tabs, Toolbar,Typography,Tab, Link,Drawer, IconButton, Divider, ListItem, ListItemText,List} from '@material-ui/core'
+import {BrowserRouter as Router,Redirect,Route,Link,Switch} from 'react-router-dom'
+import {AppBar, Tabs, Toolbar,Typography,Tab,Drawer, IconButton, Divider, ListItem, ListItemText,List, } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
 import {createMuiTheme,ThemeProvider,makeStyles,withStyles} from '@material-ui/core/styles'
 import { ChevronLeft } from '@material-ui/icons';
@@ -82,6 +82,7 @@ class App extends React.Component{
       <React.Fragment>
         <ThemeProvider theme={themes}>
           <Router>
+
             <AppBar position="fixed" color="primary" className={clsx(classes.appBar,{[classes.appBarShift]:this.state.drawerOpen})}>
               <Toolbar>
                 <IconButton color="inherit" onClick={this.handleDrawer} edge="start">
@@ -104,7 +105,7 @@ class App extends React.Component{
               </div>
                 <Divider/>
                 <List>
-                  <ListItem button>
+                  <ListItem button component={Link} to="/dash">
                     <ListItemText>Dashboard</ListItemText>
                   </ListItem>
                   <ListItem button>
@@ -116,8 +117,11 @@ class App extends React.Component{
                 </List>
             </Drawer>
 
-            <Route path='/' render={()=><Dashboard classes={classes} theme = {themes} drawerOpen={this.state.drawerOpen}/>} />
-            
+            <Switch>
+              <Route exact path='/' render={()=><Dashboard classes={classes} theme = {themes} drawerOpen={this.state.drawerOpen}/>} />
+              <Route path='/dash' render={()=><Dashboard classes={classes} theme = {themes} drawerOpen={this.state.drawerOpen}/>} />
+            </Switch>
+
           </Router>
         </ThemeProvider>
       </React.Fragment>
